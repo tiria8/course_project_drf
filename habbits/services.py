@@ -50,7 +50,7 @@ def create_massage(habit_id):
                             f'в течение {nice_time} минут')
 
             time.sleep(10)
-            nice_response = send_message_to_bot(tg_chat_id, nice_message)  # отправляем сообщение
+            nice_response = send_message_to_bot(tg_chat_id, nice_message)
 
             return HttpResponse(nice_response)
 

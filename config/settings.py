@@ -175,3 +175,14 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://read-and-write.example.com",
 ]
+
+CELERY_BEAT_SCHEDULE = {
+    'check_habits_daily': {
+        'task': 'habbits.tasks.check_habits_daily',
+        'schedule': timedelta(seconds=50),
+    },
+    'check_habits_weekly': {
+        'task': 'habbits.tasks.check_habits_weekly',
+        'schedule': timedelta(seconds=50),
+    },
+}
