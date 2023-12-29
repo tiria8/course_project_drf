@@ -18,14 +18,19 @@ services:
       - db
 
   db:
+    restart: always
     image: postgres
-    environment:
-      - POSTGRES_PASSWORD=dasha888
-      - PGDATA=/var/lib/postgresql/data/pgdata
+    env_file:
+      - .env
     volumes:
       - pg_data:/var/lib/postgresql/data/pgdata
-    ports:
-      - "5432:5432"
+    expose:
+      - '5432'
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   celery:
     build: .
